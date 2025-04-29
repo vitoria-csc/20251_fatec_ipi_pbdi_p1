@@ -1,2 +1,15 @@
-Nomes dos integrantes completos e sem abreviações e seus RAS
-Somente serão considerados os integrantes que tiverem ingressado com, no máximo, 30 minutos de atraso
+
+### Identificação dos Integrantes
+
+- Preencha abaixo o **nome completo** (sem abreviações) e o **RA** de cada integrante do grupo.
+- **Atenção:** somente serão considerados como integrantes aqueles que tiverem ingressado na atividade com, no máximo, **30 minutos de atraso**.
+
+<br>
+
+| Nome completo | RA |
+|:--------------|:---|
+|                |     |
+|                |     |
+|                |     |
+|                |     |
+|                |     |

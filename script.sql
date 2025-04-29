@@ -1,7 +1,15 @@
 -- ----------------------------------------------------------------
 -- 1 Base de dados e criação de tabela
 --escreva a sua solução aqui
-
+CREATE TABLE student_prediction(
+STUDENTID SERIAL PRIMARY KEY,
+MOTHER_EDU INT,
+FATHER_EDU INT,
+SALARY INT,
+PREP_STUDY INT,
+PREP_EXAM INT,
+GRADE INT
+);
 
 -- ----------------------------------------------------------------
 -- 2 Resultado em função da formação dos pais

@@ -115,5 +115,43 @@ $$
 -- ----------------------------------------------------------------
 -- 5. Limpeza de valores NULL
 --escreva a sua solução aqui
-
+DO $$
+DECLARE
+      cursor_null REFCURSOR;
+	  tuplas RECORD;
+BEGIN
+    OPEN cursor_null SCROLL FOR
+	SELECT 
+	* 
+	FROM 
+	student_prediction;
+	LOOP
+	 FETCH cursor_null INTO tuplaS;
+     EXIT WHEN NOT FOUND;
+	 RAISE NOTICE '%',tuplas;
+	 IF tuplas.grade IS NULL THEN
+	 DELETE FROM student_prediction WHERE CURRENT OF cursor_null;
+     ELSEIF tuplas.mother_edu IS NULL THEN
+	 DELETE FROM student_prediction WHERE CURRENT OF cursor_null;
+	 ELSEIF tuplas.father_edu IS NULL THEN
+	 DELETE FROM student_prediction WHERE CURRENT OF cursor_null;
+	 ELSEIF tuplas.salary IS NULL THEN
+	 DELETE FROM student_prediction WHERE CURRENT OF cursor_null;
+	 ELSEIF tuplas.prep_study IS NULL THEN
+	 DELETE FROM student_prediction WHERE CURRENT OF cursor_null;
+	 ELSEIF tuplas.prep_exam IS NULL THEN
+	 DELETE FROM student_prediction WHERE CURRENT OF cursor_null;
+	 ELSEIF tuplas.studentid IS NULL THEN
+	 DELETE FROM student_prediction WHERE CURRENT OF cursor_null;
+     END IF;
+	 END LOOP;
+     LOOP
+     FETCH BACKWARD FROM cursor_null INTO tuplas;
+     EXIT WHEN NOT FOUND;
+     RAISE NOTICE '%', tuplas;
+     END LOOP;
+     CLOSE cursor_null;
+     END;
+     $$
+     
 -- ----------------------------------------------------------------

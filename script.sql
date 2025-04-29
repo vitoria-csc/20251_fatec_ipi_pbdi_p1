@@ -13,6 +13,7 @@ GRADE INT
 
 -- ----------------------------------------------------------------
 -- 2 Resultado em função da formação dos pais
+--escreva a sua solução aqui
 DO $$
 DECLARE
     cur_alunos_aprovados REFCURSOR;
@@ -49,7 +50,44 @@ $$;
 -- ----------------------------------------------------------------
 -- 3 Resultado em função dos estudos
 --escreva a sua solução aqui
+DO $$ 
+DECLARE 
+       alunos_aprovados REFCURSOR;
+	   v_grade INT := 0;
+	   v_student INT;
+	   v_prep_study INT := 1;
+	   v_nome_tabela VARCHAR(200) := 'student_prediction';
+	   total_aprovados INT := 0;
+BEGIN
+      OPEN alunos_aprovados FOR EXECUTE
+      format
+      (
+         '
+           SELECT
+           studentid
+            FROM
+            %s
+            WHERE 
+			grade > $1 AND prep_study = $2
+          '
+          ,
+    v_nome_tabela
+   )USING v_grade,v_prep_study;
 
+  
+    LOOP
+      FETCH alunos_aprovados INTO v_student;
+	  EXIT WHEN NOT FOUND;
+	  total_aprovados:= total_aprovados + 1;
+	 
+    END LOOP;
+    IF total_aprovados = 0 THEN
+    RAISE NOTICE '-1';
+    END IF;
+    close alunos_aprovados;
+    RAISE NOTICE '%',total_aprovados;
+ END;
+ $$;
 
 -- ----------------------------------------------------------------
 -- 4 Salário versus estudos

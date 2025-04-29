@@ -92,7 +92,25 @@ BEGIN
 -- ----------------------------------------------------------------
 -- 4 Salário versus estudos
 --escreva a sua solução aqui
-
+DO $$
+DECLARE
+	v_salary INT := 5;
+	v_prep_exam INT := 2;
+	cur_preparacao CURSOR (salary INT, prep_exam INT) FOR SELECT studentid FROM
+	student_prediction WHERE student_prediction.salary >= v_salary AND student_prediction.prep_exam = v_prep_exam;
+	v_studentid INT;
+	v_contagem INT := 0;
+BEGIN
+	OPEN cur_preparacao (prep_exam := v_prep_exam, salary := v_salary);
+		LOOP
+			FETCH cur_preparacao INTO v_studentid;
+			EXIT WHEN NOT FOUND;
+			v_contagem := v_contagem + 1;
+		END LOOP;
+		CLOSE cur_preparacao;
+		RAISE NOTICE 'Total de alunos: %', v_contagem;
+END;
+$$
 
 -- ----------------------------------------------------------------
 -- 5. Limpeza de valores NULL
